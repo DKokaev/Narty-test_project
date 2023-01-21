@@ -1,13 +1,12 @@
 import { Container, ContainerModule, interfaces } from 'inversify';
 import { TYPES } from './types';
 import { App } from './app';
-import { ILogger } from './logger/logger_interface';
-import { LoggerService } from './logger/logger_service';
+import { ILogger } from './logger/logger.interface';
+import { LoggerService } from './logger/logger.service';
 import { IExeptionFilter } from './errors/exeption_filter_interface';
 import { ExeptionFilter } from './errors/exeption_filter';
-import { ComicsController } from './methods/comics_controller';
-// import { DatabaseConnection } from './database/db';
-// import { DirestoriesServise } from './database/directories_service';
+import { IComicsController } from './methods/comics.controller.interface';
+import { ComicsController } from './methods/comics.constroller';
 
 export interface IBootstrapReturn {
 	app: App;
@@ -18,9 +17,7 @@ export const appBinding = new ContainerModule((bind: interfaces.Bind) => {
 	bind<App>(TYPES.Application).to(App);
 	bind<ILogger>(TYPES.ILogger).to(LoggerService).inSingletonScope();
 	bind<IExeptionFilter>(TYPES.ExeptionFilter).to(ExeptionFilter).inSingletonScope();
-	bind<ComicsController>(TYPES.IComicsController).to(ComicsController).inSingletonScope();
-	// bind<DatabaseConnection>(TYPES.Database).to(DatabaseConnection).inSingletonScope();
-	// bind<DirestoriesServise>(TYPES.DirestoriesServise).to(DirestoriesServise).inSingletonScope();
+	bind<IComicsController>(TYPES.IComicsController).to(ComicsController).inSingletonScope();
 });
 
 function bootstrap(): IBootstrapReturn {
