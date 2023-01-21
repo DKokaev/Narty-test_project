@@ -131,7 +131,7 @@ export function dropComics_row(name: any): any {
 						console.log(err.message);
 						return reject(err);
 					}
-					console.log(result);
+					// console.log(result);
 					return resolve(result);
 				},
 			);
